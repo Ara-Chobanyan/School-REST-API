@@ -1,0 +1,8 @@
+- [x] Create a hello world API.
+- [x] Set up skeleton models
+- [x] Create a open DB function
+- [x] Create a simple route that pulls in data from the db and returns a json format of the data
+- [ ] Make a route that connects to the table if there is not a table it makes one
+- [ ] Pseudo code for routes
+- [x] Able to connect to a db.
+- [ ] API to create new tables.
