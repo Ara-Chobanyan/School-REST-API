@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 )
@@ -46,20 +45,5 @@ func (app *application) errorJson(w http.ResponseWriter, err error, status ...in
 	err = app.writeJson(w, statusCode, theError, "error")
 	if err != nil {
 		log.Println(err)
-	}
-}
-
-// Used to log errors from json return
-func (app *application) handleErrorJson(w http.ResponseWriter, err error) {
-	if err != nil {
-		app.errorJson(w, err)
-		return
-	}
-}
-
-// Used to log errors from error var returns
-func (app *application) logError(err error) {
-	if err != nil {
-		app.logger.Print(fmt.Errorf("Something went wrong %s", err))
 	}
 }

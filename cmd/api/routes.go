@@ -11,19 +11,17 @@ func (app *application) routes() http.Handler {
 	router := httprouter.New()
 
 	// Route to pick a single student by there id
-	router.HandlerFunc(http.MethodGet, "/v1/student/:id", app.getAStudent)
+	router.HandlerFunc(http.MethodGet, "/v1/class/id/:id", app.getAStudent)
 
+	// Gets a student by name
+	router.HandlerFunc(http.MethodGet, "/v1/class/name/:name", app.getAStudentByName)
+
+	// Gets the entire classroom
 	router.HandlerFunc(http.MethodGet, "/v1/class/", app.getClass)
 
-	// Route to get all of the students in a class
-	// router.HandlerFunc(http.MethodGet, "/v1/student/all", app.getAll)
+	router.HandlerFunc(http.MethodPost, "/v1/class/add", app.editClass)
+
+	router.HandlerFunc(http.MethodGet, "/v1/class/remove/:id", app.deleteStudent)
 
 	return router
 }
-
-/*
-Have routes that connect to a class first then give the options to make edits or switch them around
-
-/v1/:class/:id
-
-*/
