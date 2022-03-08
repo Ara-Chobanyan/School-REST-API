@@ -20,6 +20,7 @@ type StudentPayload struct {
 	Average    string `json:"average"`
 }
 
+
 type jsonResp struct {
 	OK      bool   `json:"ok"`
 	Message string `json:"message"`
@@ -178,3 +179,27 @@ func (app *application) deleteStudent(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+
+// struggling too much on it will get back to it
+// func (app *application) createClass(w http.ResponseWriter, r *http.Request) {
+//
+// 	params := httprouter.ParamsFromContext(r.Context())
+//
+// 	err := app.models.CreateClass(params.ByName("name"))
+// 	if err != nil {
+// 		app.errorJson(w, err)
+// 	}
+//
+// 	ok := jsonResp{
+// 		OK: true,
+// 	}
+//
+// 	log.Println(params)
+//
+// 	err = app.writeJson(w, http.StatusOK, ok, "response")
+// 	if err != nil {
+// 		app.errorJson(w, err)
+// 		return
+// 	}
+// }

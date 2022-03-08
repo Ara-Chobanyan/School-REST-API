@@ -36,7 +36,7 @@ func main() {
 		models: models.NewDB(db),
 	}
 
-  // Server inputs 
+	// Server inputs
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%d", port),
 		Handler:      app.routes(),
@@ -45,10 +45,11 @@ func main() {
 		WriteTimeout: 10 * time.Second,
 	}
 
+	log.Println("Running server")
+
 	err = srv.ListenAndServe()
 	if err != nil {
 		log.Println(err)
 	}
 
 }
-

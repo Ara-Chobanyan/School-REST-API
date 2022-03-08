@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 // Use to write the data from the database into json
@@ -46,4 +48,13 @@ func (app *application) errorJson(w http.ResponseWriter, err error, status ...in
 	if err != nil {
 		log.Println(err)
 	}
+}
+
+func (app *application) hashPassword(password string) string {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), 12)
+	if err != nil {
+		log.Println(err)
+	}
+
+	return string(hashedPassword)
 }

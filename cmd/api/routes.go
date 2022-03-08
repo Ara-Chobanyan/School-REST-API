@@ -19,9 +19,20 @@ func (app *application) routes() http.Handler {
 	// Gets the entire classroom
 	router.HandlerFunc(http.MethodGet, "/v1/class/", app.getClass)
 
-	router.HandlerFunc(http.MethodPost, "/v1/class/add", app.editClass)
+	// Creates a new student if no id matches any of the existing ones or if it exists then it edits there data
+	router.HandlerFunc(http.MethodPost, "/v1/admin/add", app.editClass)
 
-	router.HandlerFunc(http.MethodGet, "/v1/class/remove/:id", app.deleteStudent)
+	// Removes a student by there id
+	router.HandlerFunc(http.MethodGet, "/v1/admin/remove/:id", app.deleteStudent)
+
+	// creates an account and hashes the password
+	router.HandlerFunc(http.MethodPost, "/v1/admin/account/", app.createAccount)
+
+	//test route
+	router.HandlerFunc(http.MethodPost, "/v1/test/account/signin", app.signIn)
+
+	// struggling too much on it will get back to it
+	// router.HandlerFunc(http.MethodGet, "/v1/admin/class/:name", app.createClass)
 
 	return router
 }

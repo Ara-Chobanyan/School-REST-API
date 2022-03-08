@@ -37,6 +37,12 @@ type Student struct {
 	Average    float64 `json:"average"`
 }
 
+type Account struct {
+	ID       string `json:"id"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
 func NewDB(db *sql.DB) DB {
 	return DB{
 		DB: db,
@@ -77,7 +83,7 @@ func (s *DB) GetById(id int) (*Student, error) {
 	defer cancel()
 
 	// create a PSQL query to and have the id dynamic to the params
-	query := `select * from test_ where id = $1`
+	query := `select * from mrsmith_class where id = $1`
 
 	// Returning a row if any exist from the query
 	row := s.DB.QueryRowContext(ctx, query, id)
@@ -106,7 +112,7 @@ func (s *DB) GetAll() ([]*Student, error) {
 	defer cancel()
 
 	// query everything from test_
-	query := `select * from test_`
+	query := `select * from mrsmith_class`
 	rows, err := s.DB.QueryContext(ctx, query)
 	if err != nil {
 		return nil, err
@@ -144,7 +150,7 @@ func (s *DB) GetByName(name string) (*Student, error) {
 	defer cancel()
 
 	// create a PSQL query to and have the id dynamic to the params
-	query := `select * from test_ where first_name=$1`
+	query := `select * from mrsmith_class where first_name=$1`
 
 	// Returning a row if any exist from the query
 	row := s.DB.QueryRowContext(ctx, query, name)
@@ -173,7 +179,8 @@ func (s *DB) InsertAStudent(student Student) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `insert into test_ (first_name, last_name,comments,behavior,grade,average) values($1,$2,$3,$4,$5,$6)`
+	query := `insert into mrsmith_class (first_name, last_name,comments,behavior,grade,average) 
+            values($1,$2,$3,$4,$5,$6)`
 
 	_, err := s.DB.ExecContext(ctx, query,
 		student.First_Name,
@@ -196,7 +203,8 @@ func (s *DB) UpdateStudent(student Student) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `update test_ set first_name = $1, last_name = $2, comments = $3, behavior = $4, grade = $5, average = $6 where id = $7`
+	query := `update mrsmith_class set first_name = $1, last_name = $2, comments = $3,
+            behavior = $4, grade = $5, average = $6 where id = $7`
 
 	_, err := s.DB.ExecContext(ctx, query,
 		student.First_Name,
@@ -218,7 +226,7 @@ func (s *DB) DeleteStudent(id int) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `delete from test_ where id=$1`
+	query := `delete from mrsmith_class where id=$1`
 
 	_, err := s.DB.ExecContext(ctx, query, id)
 	if err != nil {
@@ -227,3 +235,59 @@ func (s *DB) DeleteStudent(id int) error {
 
 	return nil
 }
+
+func (s *DB) InsertAccount(user Account) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := `insert into accounts (email, password) values($1,$2)`
+
+	_, err := s.DB.ExecContext(ctx, query,
+		user.Email,
+		user.Password,
+	)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *DB) GetAccount(email string) (*Account, error) {
+	var user Account
+
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := `select * from accounts where email=$1`
+
+	row := s.DB.QueryRowContext(ctx, query, email)
+
+	err := row.Scan(
+		&user.ID,
+		&user.Email,
+		&user.Password,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
+// struggling too much on it will get back to it
+// func (s *DB) CreateClass(name string) error {
+// 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+// 	defer cancel()
+//
+// 	query := `create table mrsmith_class (id serial, first_name varchar(50), last_name varchar(50),
+//             comments varchar(50), behavior varchar(50), grade varchar(2),
+//             average float8)`
+//
+// 	_, err := s.DB.ExecContext(ctx, query, name)
+// 	if err != nil {
+// 		return err
+// 	}
+//
+// 	return nil
+// }
