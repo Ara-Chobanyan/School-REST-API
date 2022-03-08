@@ -181,7 +181,7 @@ func (app *application) deleteStudent(w http.ResponseWriter, r *http.Request) {
 }
 
 
-// struggling too much on it will get back to it
+// struggling too much on it will get back to it trying to make a table from the params but not working probably not even a safe thing to do
 // func (app *application) createClass(w http.ResponseWriter, r *http.Request) {
 //
 // 	params := httprouter.ParamsFromContext(r.Context())

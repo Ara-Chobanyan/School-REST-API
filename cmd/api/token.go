@@ -13,7 +13,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-const secret = "2dce505d96a53c5768052ee90f3df2055657518dad489160df9913f66042e160"
+const SECRET = "2dce505d96a53c5768052ee90f3df2055657518dad489160df9913f66042e160"
 
 type AccountPayload struct {
 	Email    string `json:"email"`
@@ -69,8 +69,6 @@ func (app *application) signIn(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Println(creds)
-
 	hashedPassword, err := app.models.GetAccount(creds.Email)
 	if err != nil {
 		app.errorJson(w, errors.New("unauthorized"))
@@ -92,13 +90,13 @@ func (app *application) signIn(w http.ResponseWriter, r *http.Request) {
 	claims.Issuer = "mydomain.com"
 	claims.Audiences = []string{"mydomain.com"}
 
-	jwtBytes, err := claims.HMACSign(jwt.HS256, []byte(secret))
+	jwtBytes, err := claims.HMACSign(jwt.HS256, []byte(SECRET))
 	if err != nil {
 		app.errorJson(w, errors.New("error signing"))
 		return
 	}
 
-	err = app.writeJson(w, http.StatusOK, jwtBytes, "response")
+	err = app.writeJson(w, http.StatusOK, string(jwtBytes), "response")
 	if err != nil {
 		app.errorJson(w, err)
 		return

@@ -8,4 +8,7 @@ require (
 	golang.org/x/crypto v0.0.0-20220307211146-efcb8507fb70
 )
 
-require github.com/pascaldekloe/jwt v1.10.0 // indirect
+require (
+	github.com/justinas/alice v1.2.0 // indirect
+	github.com/pascaldekloe/jwt v1.10.0 // indirect
+)
