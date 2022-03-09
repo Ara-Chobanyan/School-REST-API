@@ -26,6 +26,7 @@ type Credentials struct {
 	Password string `json:"password"`
 }
 
+// adds a user to the database and hashes there password
 func (app *application) createAccount(w http.ResponseWriter, r *http.Request) {
 	var payload AccountPayload
 
@@ -60,6 +61,7 @@ func (app *application) createAccount(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// authenticates a user and sends them a jwt token
 func (app *application) signIn(w http.ResponseWriter, r *http.Request) {
 	var creds Credentials
 

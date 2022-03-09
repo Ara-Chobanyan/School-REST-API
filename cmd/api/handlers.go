@@ -20,7 +20,6 @@ type StudentPayload struct {
 	Average    string `json:"average"`
 }
 
-
 type jsonResp struct {
 	OK      bool   `json:"ok"`
 	Message string `json:"message"`
@@ -63,6 +62,7 @@ func (app *application) getClass(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// write back json
 	err = app.writeJson(w, http.StatusOK, class, "classname")
 	if err != nil {
 		app.errorJson(w, err)
@@ -72,6 +72,7 @@ func (app *application) getClass(w http.ResponseWriter, r *http.Request) {
 
 // getAStudentByName - Finds a student by there name
 func (app *application) getAStudentByName(w http.ResponseWriter, r *http.Request) {
+	// gets the params
 	params := httprouter.ParamsFromContext(r.Context())
 
 	name := params.ByName("name")
@@ -158,6 +159,7 @@ func (app *application) deleteStudent(w http.ResponseWriter, r *http.Request) {
 	params := httprouter.ParamsFromContext(r.Context())
 
 	id, err := strconv.Atoi(params.ByName("id"))
+	log.Println(id)
 	if err != nil {
 		app.errorJson(w, err)
 		return
@@ -179,27 +181,3 @@ func (app *application) deleteStudent(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
-
-
-// struggling too much on it will get back to it trying to make a table from the params but not working probably not even a safe thing to do
-// func (app *application) createClass(w http.ResponseWriter, r *http.Request) {
-//
-// 	params := httprouter.ParamsFromContext(r.Context())
-//
-// 	err := app.models.CreateClass(params.ByName("name"))
-// 	if err != nil {
-// 		app.errorJson(w, err)
-// 	}
-//
-// 	ok := jsonResp{
-// 		OK: true,
-// 	}
-//
-// 	log.Println(params)
-//
-// 	err = app.writeJson(w, http.StatusOK, ok, "response")
-// 	if err != nil {
-// 		app.errorJson(w, err)
-// 		return
-// 	}
-// }

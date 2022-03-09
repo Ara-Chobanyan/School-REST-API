@@ -2,9 +2,7 @@ package main
 
 import (
 	"errors"
-	// "log"
 	"net/http"
-	// "strconv"
 	"strings"
 	"time"
 
@@ -59,15 +57,6 @@ func (app *application) checkToken(next http.Handler) http.Handler {
 			app.errorJson(w, errors.New("unauthorized - invalid issuer"), http.StatusForbidden)
 			return
 		}
-
-		// userID, err := strconv.ParseInt(claims.Subject, 10, 64)
-		// log.Println(userID)
-		// if err != nil {
-		// 	app.errorJson(w, errors.New("unauthorized test"), http.StatusForbidden)
-		// 	return
-		// }
-		//
-		// log.Println("Valid user:", userID)
 
 		next.ServeHTTP(w, r)
 	})

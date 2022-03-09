@@ -18,8 +18,8 @@ import (
 const (
 	host     = "localhost"
 	port     = "5432"
-	user     = "ara"
-	password = "arayik01"
+	user     = "name"
+	password = "password"
 	db       = "school"
 )
 
@@ -275,19 +275,3 @@ func (s *DB) GetAccount(email string) (*Account, error) {
 	return &user, nil
 }
 
-// struggling too much on it will get back to it
-// func (s *DB) CreateClass(name string) error {
-// 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
-// 	defer cancel()
-//
-// 	query := `create table mrsmith_class (id serial, first_name varchar(50), last_name varchar(50),
-//             comments varchar(50), behavior varchar(50), grade varchar(2),
-//             average float8)`
-//
-// 	_, err := s.DB.ExecContext(ctx, query, name)
-// 	if err != nil {
-// 		return err
-// 	}
-//
-// 	return nil
-// }
