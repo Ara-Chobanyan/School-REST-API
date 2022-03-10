@@ -18,8 +18,8 @@ import (
 const (
 	host     = "localhost"
 	port     = "5432"
-	user     = "ara"
-	password = "arayik01"
+	user     = "name"
+	password = "password"
 	db       = "school"
 )
 
