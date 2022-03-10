@@ -9,6 +9,7 @@ import (
 	"github.com/pascaldekloe/jwt"
 )
 
+// Allow for a client to call on the APIs without issues with cors
 func (app *application) enableCORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		rw.Header().Set("Access-Control-Allow-Origin", "*")
@@ -18,6 +19,7 @@ func (app *application) enableCORS(next http.Handler) http.Handler {
 
 }
 
+// Check on the JWT to see if its authentic
 func (app *application) checkToken(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Add("Vary", "Authorization")

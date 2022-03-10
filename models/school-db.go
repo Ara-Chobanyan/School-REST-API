@@ -18,8 +18,8 @@ import (
 const (
 	host     = "localhost"
 	port     = "5432"
-	user     = "name"
-	password = "password"
+	user     = "ara"
+	password = "arayik01"
 	db       = "school"
 )
 
@@ -106,6 +106,7 @@ func (s *DB) GetById(id int) (*Student, error) {
 	return &student, nil
 }
 
+// Displays everything from the class table
 func (s *DB) GetAll() ([]*Student, error) {
 	// context to end connection if it takes longer then 3 seoncds
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
@@ -141,6 +142,7 @@ func (s *DB) GetAll() ([]*Student, error) {
 	return students, nil
 }
 
+// Finds a student by there first name
 func (s *DB) GetByName(name string) (*Student, error) {
 	// Declare a student data structure
 	var student Student
@@ -199,6 +201,7 @@ func (s *DB) InsertAStudent(student Student) error {
 	return nil
 }
 
+// Updates a student from the database
 func (s *DB) UpdateStudent(student Student) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
@@ -222,6 +225,7 @@ func (s *DB) UpdateStudent(student Student) error {
 	return nil
 }
 
+// Deletes a student from the database
 func (s *DB) DeleteStudent(id int) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
@@ -236,6 +240,7 @@ func (s *DB) DeleteStudent(id int) error {
 	return nil
 }
 
+// Creates a new user account
 func (s *DB) InsertAccount(user Account) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
@@ -253,6 +258,7 @@ func (s *DB) InsertAccount(user Account) error {
 	return nil
 }
 
+// Returns a Account from the DB to json so it can be checked to see if the client credentials are correct
 func (s *DB) GetAccount(email string) (*Account, error) {
 	var user Account
 
@@ -274,4 +280,3 @@ func (s *DB) GetAccount(email string) (*Account, error) {
 
 	return &user, nil
 }
-
