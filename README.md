@@ -11,7 +11,7 @@ It was really straightforward dealing with the routing and making the handlers f
 Using [httprouter](https://github.com/julienschmidt/httprouter) for the routing was really enjoyable especially the ease of use for getting the routes parameters and using the values of it, to interact with the handler functions and supply them inside my SQL functions to activate database queries.
 
 The project over is quite simple, it has seven routes each with simple functionalities two of them are protected for they deal with creating, editing and deleting from the database. 
-The basic rundown for the routes is that they either pull classroom data (In a JSON format) from the database or allow creating, editing and deleting the from database.
+The basic rundown for the routes is that they either pull classroom data (In JSON) from the database or allow creating, editing and deleting the from database.
 
 I also created an account table in the database, where two routes are connected one for creating an admin account with just a email and password.
 The password is then encrypted using the bcrypt package before being stored in the database. 
