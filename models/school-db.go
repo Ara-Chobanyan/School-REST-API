@@ -18,10 +18,13 @@ import (
 const (
 	host     = "localhost"
 	port     = "5432"
-	user     = "name"
-	password = "password"
 	db       = "school"
+	password = "arayik01"
+	user     = "ara"
 )
+
+// var password = os.Getenv("GO_PSQL_PASSWORD")
+// var user = os.Getenv("GO_PSQL_USERNAME")
 
 type DB struct {
 	DB *sql.DB
@@ -32,7 +35,7 @@ type Student struct {
 	First_Name string  `json:"first_name"`
 	Last_Name  string  `json:"last_name"`
 	Comments   string  `json:"comments"`
-	Behvaior   string  `json:"behavior"`
+	Behavior   string  `json:"behavior"`
 	Grade      string  `json:"grade"`
 	Average    float64 `json:"average"`
 }
@@ -73,7 +76,7 @@ func OpenDB() (*sql.DB, error) {
 	return db, nil
 }
 
-// Get - Quires for a matching id
+// Get - calls for a matching id
 func (s *DB) GetById(id int) (*Student, error) {
 	// Declare a student data structure
 	var student Student
@@ -82,11 +85,8 @@ func (s *DB) GetById(id int) (*Student, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	// create a PSQL query to and have the id dynamic to the params
-	query := `select * from mrsmith_class where id = $1`
-
 	// Returning a row if any exist from the query
-	row := s.DB.QueryRowContext(ctx, query, id)
+	row := s.DB.QueryRowContext(ctx, `SELECT * FROM mrsmith_class WHERE id = $1`, id)
 
 	//Scan the row and copy the values that then returns a student data type which can be used to for the json function - writeJson
 	err := row.Scan(
@@ -94,7 +94,7 @@ func (s *DB) GetById(id int) (*Student, error) {
 		&student.First_Name,
 		&student.Last_Name,
 		&student.Comments,
-		&student.Behvaior,
+		&student.Behavior,
 		&student.Grade,
 		&student.Average,
 	)
@@ -113,7 +113,7 @@ func (s *DB) GetAll() ([]*Student, error) {
 	defer cancel()
 
 	// query everything from test_
-	query := `select * from mrsmith_class`
+	query := `SELECT * from mrsmith_class`
 	rows, err := s.DB.QueryContext(ctx, query)
 	if err != nil {
 		return nil, err
@@ -129,7 +129,7 @@ func (s *DB) GetAll() ([]*Student, error) {
 			&student.First_Name,
 			&student.Last_Name,
 			&student.Comments,
-			&student.Behvaior,
+			&student.Behavior,
 			&student.Grade,
 			&student.Average,
 		)
@@ -152,7 +152,7 @@ func (s *DB) GetByName(name string) (*Student, error) {
 	defer cancel()
 
 	// create a PSQL query to and have the id dynamic to the params
-	query := `select * from mrsmith_class where first_name=$1`
+	query := `SELECT * from mrsmith_class where first_name=$1`
 
 	// Returning a row if any exist from the query
 	row := s.DB.QueryRowContext(ctx, query, name)
@@ -163,7 +163,7 @@ func (s *DB) GetByName(name string) (*Student, error) {
 		&student.First_Name,
 		&student.Last_Name,
 		&student.Comments,
-		&student.Behvaior,
+		&student.Behavior,
 		&student.Grade,
 		&student.Average,
 	)
@@ -181,14 +181,20 @@ func (s *DB) InsertAStudent(student Student) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `insert into mrsmith_class (first_name, last_name,comments,behavior,grade,average) 
-            values($1,$2,$3,$4,$5,$6)`
+	query := `INSERT INTO mrsmith_class (first_name, last_name, comments, behavior, grade, average) VALUES ($1, $2, $3, $4, $5, $6)`
 
-	_, err := s.DB.ExecContext(ctx, query,
+	stmt, err := s.DB.PrepareContext(ctx, query)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	defer stmt.Close()
+
+	_, err = stmt.ExecContext(ctx,
 		student.First_Name,
 		student.Last_Name,
 		student.Comments,
-		student.Behvaior,
+		student.Behavior,
 		student.Grade,
 		student.Average,
 	)
@@ -213,7 +219,7 @@ func (s *DB) UpdateStudent(student Student) error {
 		student.First_Name,
 		student.Last_Name,
 		student.Comments,
-		student.Behvaior,
+		student.Behavior,
 		student.Grade,
 		student.Average,
 		student.ID,
@@ -230,13 +236,15 @@ func (s *DB) DeleteStudent(id int) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `delete from mrsmith_class where id=$1`
+	query := `DELETE from mrsmith_class WHERE id=$1`
 
-	_, err := s.DB.ExecContext(ctx, query, id)
+	stmt, err := s.DB.PrepareContext(ctx, query)
 	if err != nil {
 		return err
 	}
+	defer stmt.Close()
 
+	_, err = stmt.ExecContext(ctx, id)
 	return nil
 }
 

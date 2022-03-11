@@ -15,7 +15,7 @@ type StudentPayload struct {
 	First_Name string `json:"first_name"`
 	Last_Name  string `json:"last_name"`
 	Comments   string `json:"comments"`
-	Behvaior   string `json:"behavior"`
+	Behavior   string `json:"behavior"`
 	Grade      string `json:"grade"`
 	Average    string `json:"average"`
 }
@@ -126,7 +126,7 @@ func (app *application) editClass(w http.ResponseWriter, r *http.Request) {
 	student.First_Name = payload.First_Name
 	student.Last_Name = payload.Last_Name
 	student.Comments = payload.Comments
-	student.Behvaior = payload.Behvaior
+	student.Behavior = payload.Behavior
 	student.Grade = payload.Grade
 	student.Average, _ = strconv.ParseFloat(payload.Average, 64)
 
