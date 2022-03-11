@@ -7,7 +7,7 @@ The main reason for this project was for me to give my self a reason to use the 
 As well other community developed packages dealing with routing and networking.
 It also gave me a purpose to make a **GO** based REST API and in all honestly I really enjoyed the development experience.
 It was really straightforward dealing with the routing and making the handlers for each routes.
-Using https://github.com/julienschmidt/httprouter for the routing was really enjoyable especially the ease of use for getting the routes parameters and using the values of it, to interact with the handler functions and supply them inside my SQL functions to activate database queries.
+Using [httprouter](https://github.com/julienschmidt/httprouter) for the routing was really enjoyable especially the ease of use for getting the routes parameters and using the values of it, to interact with the handler functions and supply them inside my SQL functions to activate database queries.
 
 The project over is quite simple, it has seven routes each with simple functionalities two of them are protected for they deal with creating, editing and deleting from the database. 
 The basic rundown for the routes is that they either pull classroom data from the database or allow creating, editing and deleting the from database.
