@@ -46,3 +46,4 @@ the routes though.
 # TODO
 - [ ] Learn how to make tests for routes.
 - [ ] Make tests for my routes and handlers.
+- [ ] To Dockerize this project.
