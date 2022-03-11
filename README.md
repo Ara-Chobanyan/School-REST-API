@@ -14,7 +14,7 @@ The project over is quite simple, it has seven routes each with simple functiona
 The basic rundown for the routes is that they either pull classroom data from the database or allow creating, editing and deleting the from database.
 
 I also created an account table in the database, where two routes are connected one for creating an admin account with just a email and password.
-The password is then encrypted use bcrypt package before being stored in the database. 
+The password is then encrypted using the bcrypt package before being stored in the database. 
 Second route is pulling in the email and hashed password so the password can be decrypted to see if the client password is correct when compared to the stored password.
 If the user is authenticated they receive a JWT which will then allow them to access the routes dealing with deleting and editing/adding the class table in the database.
 
