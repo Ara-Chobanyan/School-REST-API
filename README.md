@@ -21,6 +21,17 @@ If the user is authenticated they receive a JWT which will then allow them to ac
 Overall this was a simple project but I really did enjoy it and did learn quite a bit especially making tests for SQL based functions, I still need to learn how to make tests for 
 the routes though.
 
+# Learned
+- Making a REST API in GO.
+- Routing and Handlers for the API.
+- Securing Routes with JWT.
+- Mocking SQL drivers to test using [go-sqlmock](https://github.com/DATA-DOG/go-sqlmock).
+- Creating SQL functions to interact with the database when an API is called.
+
+# Struggled With
+- Testing SQL based functions.
+- Testing Routes (Still need to learn this).
+
 # TODO
 - [ ] Learn how to make tests for routes.
 - [ ] Make tests for my routes and handlers.
