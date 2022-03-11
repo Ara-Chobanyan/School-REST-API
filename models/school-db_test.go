@@ -30,12 +30,6 @@ var b = Student{
 	Average:    94,
 }
 
-var c = Account{
-	ID:       "1",
-	Email:    "me@here.com",
-	Password: "password",
-}
-
 func NewMock() (*sql.DB, sqlmock.Sqlmock) {
 	db, mock, err := sqlmock.New()
 	if err != nil {
@@ -148,4 +142,3 @@ func TestUpdateStudent(t *testing.T) {
 	assert.NoError(t, err)
 
 }
-
