@@ -19,6 +19,7 @@ type application struct {
 	models models.DB
 }
 
+
 func main() {
 	// To log any potential errors
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)

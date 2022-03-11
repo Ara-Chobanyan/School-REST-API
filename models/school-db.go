@@ -19,8 +19,8 @@ const (
 	host     = "localhost"
 	port     = "5432"
 	db       = "school"
-	password = "arayik01"
-	user     = "ara"
+	password = "password"
+	user     = "name"
 )
 
 // var password = os.Getenv("GO_PSQL_PASSWORD")
@@ -212,10 +212,16 @@ func (s *DB) UpdateStudent(student Student) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `update mrsmith_class set first_name = $1, last_name = $2, comments = $3,
-            behavior = $4, grade = $5, average = $6 where id = $7`
+	query := `UPDATE mrsmith_class SET first_name = $1, last_name = $2, comments = $3,
+            behavior = $4, grade = $5, average = $6 WHERE id = $7`
 
-	_, err := s.DB.ExecContext(ctx, query,
+	stmt, err := s.DB.PrepareContext(ctx, query)
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+
+	_, err = s.DB.ExecContext(ctx, query,
 		student.First_Name,
 		student.Last_Name,
 		student.Comments,
@@ -245,6 +251,9 @@ func (s *DB) DeleteStudent(id int) error {
 	defer stmt.Close()
 
 	_, err = stmt.ExecContext(ctx, id)
+	if err != nil {
+		log.Println(err)
+	}
 	return nil
 }
 
@@ -253,7 +262,7 @@ func (s *DB) InsertAccount(user Account) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := `insert into accounts (email, password) values($1,$2)`
+	query := `INSERT INTO accounts (email, password) values($1,$2)`
 
 	_, err := s.DB.ExecContext(ctx, query,
 		user.Email,

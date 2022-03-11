@@ -130,6 +130,7 @@ func (app *application) editClass(w http.ResponseWriter, r *http.Request) {
 	student.Grade = payload.Grade
 	student.Average, _ = strconv.ParseFloat(payload.Average, 64)
 
+	// To check if its for a new student or to update a student
 	if student.ID == 0 {
 		err = app.models.InsertAStudent(student)
 		if err != nil {

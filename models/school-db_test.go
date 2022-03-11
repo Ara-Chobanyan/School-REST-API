@@ -30,6 +30,12 @@ var b = Student{
 	Average:    94,
 }
 
+var c = Account{
+	ID:       "1",
+	Email:    "me@here.com",
+	Password: "password",
+}
+
 func NewMock() (*sql.DB, sqlmock.Sqlmock) {
 	db, mock, err := sqlmock.New()
 	if err != nil {
@@ -125,3 +131,21 @@ func TestInsertAStudent(t *testing.T) {
 	err := repo.InsertAStudent(b)
 	assert.NoError(t, err)
 }
+
+func TestUpdateStudent(t *testing.T) {
+	db, mock := NewMock()
+	repo := &DB{DB: db}
+	defer func() {
+		repo.DB.Close()
+	}()
+
+	query := `UPDATE mrsmith_class SET first_name \= \$1, last_name \= \$2, comments \= \$3, behavior \= \$4, grade \= \$5, average \= \$6  WHERE id \= \$7`
+
+	prep := mock.ExpectPrepare(query)
+	prep.ExpectExec().WithArgs(b.First_Name, b.Last_Name, b.Comments, b.Behavior, b.Grade, b.Average, b.ID).WillReturnResult(sqlmock.NewResult(0, 1))
+
+	err := repo.UpdateStudent(b)
+	assert.NoError(t, err)
+
+}
+
