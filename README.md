@@ -15,7 +15,7 @@ The basic rundown for the routes is that they either pull classroom data from th
 
 I also created an account table in the database, where two routes are connected one for creating an admin account with just a email and password.
 The password is then encrypted using the bcrypt package before being stored in the database. 
-Second route is pulling in the email and hashed password so the password can be decrypted to see if the client password is correct when compared to the stored password.
+Second route is pulling in the email and hashed password, so that the password can be decrypted to see if the client password is correct when compared to the stored password.
 If the user is authenticated they receive a JWT which will then allow them to access the routes dealing with deleting and editing/adding the class table in the database.
 
 Overall this was a simple project but I really did enjoy it and did learn quite a bit especially making tests for SQL based functions, I still need to learn how to make tests for 
