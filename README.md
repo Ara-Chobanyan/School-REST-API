@@ -41,7 +41,7 @@ the routes though.
 
 # Credits
 - Helped me as well teaching me the basic concept of making tests for databases. [Article](https://medium.com/easyread/unit-test-sql-in-golang-5af19075e68e)
-- Sad to say it took me 6 hours to figure out that the query was not matching for the testing was cause of regex.[Stack overflow](https://stackoverflow.com/questions/59652031/sqlmock-is-not-matching-query-but-query-is-identical-and-log-output-shows-the-s) [The tool](https://regex-escape.com/regex-escaper-online.php)
+- Sad to say it took me 6 hours to figure out that the query was not matching for the testing was cause of regex.[Stack overflow](https://stackoverflow.com/questions/59652031/sqlmock-is-not-matching-query-but-query-is-identical-and-log-output-shows-the-s) and [the tool](https://regex-escape.com/regex-escaper-online.php)
 
 # TODO
 - [ ] Learn how to make tests for routes.
