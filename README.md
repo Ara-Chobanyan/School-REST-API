@@ -6,6 +6,7 @@ is to manage student related data and upload it to a database and returning JSON
 The main reason for this project was for me to give my self a reason to use the http/net package.
 As well other community developed packages dealing with routing and networking.
 It also gave me a purpose to make a **GO** based REST API and in all honestly I really enjoyed the development experience.
+
 It was really straightforward dealing with the routing and making the handlers for each routes.
 Using [httprouter](https://github.com/julienschmidt/httprouter) for the routing was really enjoyable especially the ease of use for getting the routes parameters and using the values of it, to interact with the handler functions and supply them inside my SQL functions to activate database queries.
 
