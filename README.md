@@ -27,10 +27,21 @@ the routes though.
 - Securing Routes with JWT.
 - Mocking SQL drivers to test using [go-sqlmock](https://github.com/DATA-DOG/go-sqlmock).
 - Creating SQL functions to interact with the database when an API is called.
+- Making a API with CRUD operations.
+- Creating slices of data from the database to convert it to json.
+- Practice in creating and using custom data structures.
+- Basic usage of Bcrypt package.
+- Unpacking payloads from the client and upload it to the database.
+
 
 # Struggled With
 - Testing SQL based functions.
 - Testing Routes (Still need to learn this).
+- Making middleware to check JWT.
+
+# Credits
+- Helped me as well teaching me the basic concept of making tests for databases. [Article](https://medium.com/easyread/unit-test-sql-in-golang-5af19075e68e)
+- Sad to say it took me 6 hours to figure out that the query was not matching for the testing was cause of regex.[Stack overflow](https://stackoverflow.com/questions/59652031/sqlmock-is-not-matching-query-but-query-is-identical-and-log-output-shows-the-s) [The tool](https://regex-escape.com/regex-escaper-online.php)
 
 # TODO
 - [ ] Learn how to make tests for routes.
