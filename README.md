@@ -20,3 +20,7 @@ If the user is authenticated they receive a JWT which will then allow them to ac
 
 Overall this was a simple project but I really did enjoy it and did learn quite a bit especially making tests for SQL based functions, I still need to learn how to make tests for 
 the routes though.
+
+# TODO
+- [ ] Learn how to make tests for routes.
+- [ ] Make tests for my routes and handlers.
