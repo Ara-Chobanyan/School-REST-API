@@ -3,8 +3,8 @@
  RUN mkdir /app
  WORKDIR /app
 
- COPY  go.mod go.mod
- RUN go mod tidy
+ COPY  go.mod go.sum
+ RUN go mod download 
 
  COPY . .
 
