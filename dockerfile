@@ -7,7 +7,13 @@
  COPY go.sum ./
  RUN go mod download
 
+ COPY *.go ./
+
+ RUN go build ./cmd/api/
+
+ EXPOSE 4000
+
  LABEL  maintainer="Ara Chobanyan <test@email.com>" \
         version="1.0" 
 
- CMD go run ./cmd/api
+ CMD [ "/api" ] 
