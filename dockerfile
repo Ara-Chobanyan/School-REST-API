@@ -3,10 +3,9 @@
  RUN mkdir /app
  WORKDIR /app
 
- COPY  go.mod go.sum
- RUN go mod download 
-
- COPY . .
+ COPY go.mod ./
+ COPY go.sum ./
+ RUN go mod download
 
  LABEL  maintainer="Ara Chobanyan <test@email.com>" \
         version="1.0" 
