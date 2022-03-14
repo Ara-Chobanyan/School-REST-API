@@ -19,8 +19,8 @@ const (
 	host     = "localhost"
 	port     = "5432"
 	db       = "school"
-	password = "password"
-	user     = "name"
+	password = "arayik01"
+	user     = "ara"
 )
 
 // var password = os.Getenv("GO_PSQL_PASSWORD")
