@@ -20,8 +20,6 @@ type config struct {
 	}
 }
 
-const port = 4000
-
 // To avoid gloabl imports and use this as a method for functions
 // that either interact with the database or need use of logger
 type application struct {

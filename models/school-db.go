@@ -9,15 +9,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// Not too sure but I believe in a bigger project this should be a struct if the
-// project would require multiple databases or differnt ports and config
-// but I dont see a reason to add that type code cause it does not serve me in
-//this project then again I am very inexpeinced so I can't be sure. Added this
-//to be reminded to ask people and to just keep me thinking.
-
-// var password = os.Getenv("GO_PSQL_PASSWORD")
-// var user = os.Getenv("GO_PSQL_USERNAME")
-
 type DB struct {
 	DB *sql.DB
 }
