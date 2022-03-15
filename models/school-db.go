@@ -3,7 +3,6 @@ package models
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"log"
 	"time"
 
@@ -15,13 +14,6 @@ import (
 // but I dont see a reason to add that type code cause it does not serve me in
 //this project then again I am very inexpeinced so I can't be sure. Added this
 //to be reminded to ask people and to just keep me thinking.
-const (
-	host     = "localhost"
-	port     = "5432"
-	db       = "school"
-	password = "password"
-	user     = "name"
-)
 
 // var password = os.Getenv("GO_PSQL_PASSWORD")
 // var user = os.Getenv("GO_PSQL_USERNAME")
@@ -50,30 +42,6 @@ func NewDB(db *sql.DB) DB {
 	return DB{
 		DB: db,
 	}
-}
-
-// OpenDB - Opens connection to the database
-func OpenDB() (*sql.DB, error) {
-	// Info used to connect to the PSQL database
-	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s database=%s sslmode=disable", host, port, user, password, db)
-
-	// PSQL credentials fed into the driver to open up the database
-	db, err := sql.Open("postgres", psqlInfo)
-	if err != nil {
-		return nil, err
-	}
-
-	// Context used to cancel data transfer if it takes longer then 5 seconds
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-
-	// Used to make sure of connection to the db is alive
-	err = db.PingContext(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	return db, nil
 }
 
 // Get - calls for a matching id
