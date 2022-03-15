@@ -11,8 +11,6 @@
 
  RUN go build ./cmd/api
 
- EXPOSE 4000
-
  LABEL  maintainer="Ara Chobanyan <test@email.com>" \
         version="1.0" 
 
