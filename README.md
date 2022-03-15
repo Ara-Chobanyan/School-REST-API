@@ -44,6 +44,5 @@ the routes though.
 - Sad to say it took me 6 hours to figure out that the query was not matching for the testing was cause of regex. [Stack overflow](https://stackoverflow.com/questions/59652031/sqlmock-is-not-matching-query-but-query-is-identical-and-log-output-shows-the-s) and [the tool](https://regex-escape.com/regex-escaper-online.php)
 
 # TODO
-- [ ] Learn how to make tests for routes.
 - [ ] Make tests for my routes and handlers.
 - [ ] To Dockerize this project.
