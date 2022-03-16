@@ -1,18 +1,7 @@
-version: '3'
-
-# database seems to be working need to work on the api 
+version: '3.8'
 
 services:
-  goapi:
-    build: '.'
-    image: 'golang:1.17.8-alpine3.15'
-    container_name: 'rest-api'
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db 
-    networks:
-      - goapi
+
   db:
     image: 'postgres:14.2-alpine3.15'
     container_name: 'postgres'
@@ -23,14 +12,31 @@ services:
       POSTGRES_DB: school
       DB_PORT: "5432"
     ports:
-      - "5000:5000"
+      - "5432:5432"
     networks:
       - goapi
     volumes:
       - postgres:/var/lib/postgresql/data 
 
+  goapi:
+    build: .
+    image: 'golang:1.17.8-alpine3.15'
+    container_name: 'go-rest-api'
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: local-host
+      POSTGRES_DB: school
+      DB_PORT: "5432"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db 
+    networks:
+      - goapi
+
 volumes:
-  postgres: {}
+  postgres: 
 
 networks:
   goapi:
