@@ -36,8 +36,9 @@ the routes though.
 
 # Struggled With
 - Testing SQL based functions.
-- Testing Routes (Still need to learn this).
+- Testing Routes (Still need to research the subject in depth).
 - Making middleware to check JWT.
+- Getting the dockerized API working with the dockerized psql db.
 
 # Credits
 - Helped me as well teaching me the basic concept of making tests for databases. [Article](https://medium.com/easyread/unit-test-sql-in-golang-5af19075e68e)
