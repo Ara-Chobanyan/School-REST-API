@@ -30,6 +30,7 @@ type application struct {
 func main() {
 	var cfg config
 
+	// Have flags so when compiled the user can add there own custom port or dsn info so no need to recompile
 	flag.IntVar(&cfg.port, "port", 3000, "Server port to listen on")
 	flag.StringVar(&cfg.db.dsn, "dsn", "postgres://user:password@localhost/school?sslmode=disable", "Postgress connection")
 	flag.Parse()
