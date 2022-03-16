@@ -31,7 +31,7 @@ func main() {
 	var cfg config
 
 	flag.IntVar(&cfg.port, "port", 3000, "Server port to listen on")
-	flag.StringVar(&cfg.db.dsn, "dsn", "postgres://ara:arayik01@localhost/school?sslmode=disable", "Postgress connection")
+	flag.StringVar(&cfg.db.dsn, "dsn", "postgres://user:password@localhost/school?sslmode=disable", "Postgress connection")
 	flag.Parse()
 
 	// To log any potential errors

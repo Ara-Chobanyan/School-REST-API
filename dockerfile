@@ -8,7 +8,6 @@
  COPY go.sum ./
  RUN go mod download
 
-
  RUN go build ./cmd/api
 
  LABEL  maintainer="Ara Chobanyan <test@email.com>" \
