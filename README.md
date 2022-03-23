@@ -47,3 +47,6 @@ the routes though.
 # Issues
 - Docker file not working api is refusing connections. But the PostgreSQL container does seem like it is working, just not the go api (need to do some research).
 - Route testing has not been done.
+
+# Todo 
+- [ ] Dockerize the project.
