@@ -58,6 +58,7 @@ func (s *DB) GetById(id int) (*Student, error) {
 		&student.Average,
 	)
 	if err != nil {
+		log.Printf("Could not scan rows school-db.GetById: %v", err)
 		return nil, err
 	}
 
@@ -93,6 +94,7 @@ func (s *DB) GetAll() ([]*Student, error) {
 			&student.Average,
 		)
 		if err != nil {
+			log.Printf("Could not scan rows at school-db.GetAll: %v", err)
 			return nil, err
 		}
 		students = append(students, &student)
@@ -127,6 +129,7 @@ func (s *DB) GetByName(name string) (*Student, error) {
 		&student.Average,
 	)
 	if err != nil {
+		log.Printf("Could not scan rows at school-db.GetByName: %v", err)
 		return nil, err
 	}
 
@@ -144,7 +147,7 @@ func (s *DB) InsertAStudent(student Student) error {
 
 	stmt, err := s.DB.PrepareContext(ctx, query)
 	if err != nil {
-		log.Println(err)
+		log.Printf("Could not execute query at school-db.InsertAStudent: %V", err)
 		return err
 	}
 	defer stmt.Close()
@@ -159,7 +162,7 @@ func (s *DB) InsertAStudent(student Student) error {
 	)
 
 	if err != nil {
-		log.Println(err)
+		log.Printf("Could not add a new student at school-db.InsertAStudent: %v", err)
 		return err
 	}
 
@@ -189,8 +192,10 @@ func (s *DB) UpdateStudent(student Student) error {
 		student.Average,
 		student.ID,
 	)
+
 	if err != nil {
-		log.Println(err)
+		log.Printf("Could not update student at school-db.UpdateStudent: %v", err)
+		return err
 	}
 
 	return nil
@@ -211,7 +216,8 @@ func (s *DB) DeleteStudent(id int) error {
 
 	_, err = stmt.ExecContext(ctx, id)
 	if err != nil {
-		log.Println(err)
+		log.Printf("Could not remove a student at school-db.DeleteStudent: %v", err)
+		return err
 	}
 	return nil
 }
@@ -228,6 +234,7 @@ func (s *DB) InsertAccount(user Account) error {
 		user.Password,
 	)
 	if err != nil {
+		log.Printf("Could not create a new account at school-db.InsertAStudent: %v", err)
 		return err
 	}
 
@@ -251,6 +258,7 @@ func (s *DB) GetAccount(email string) (*Account, error) {
 		&user.Password,
 	)
 	if err != nil {
+		log.Printf("Could not get a user account at school-db.GetAccount: %v", err)
 		return nil, err
 	}
 

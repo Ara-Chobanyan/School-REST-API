@@ -23,6 +23,7 @@ func (app *application) writeJson(w http.ResponseWriter, status int, data interf
 	w.WriteHeader(status)
 	_, err = w.Write(js)
 	if err != nil {
+		log.Printf("Could not write json at utilities.writeJson: %v", err)
 		return err
 	}
 
@@ -46,14 +47,14 @@ func (app *application) errorJson(w http.ResponseWriter, err error, status ...in
 
 	err = app.writeJson(w, statusCode, theError, "error")
 	if err != nil {
-		log.Println(err)
+		log.Printf("Could not write json at utilities.errorJson: %v", err)
 	}
 }
 
 func (app *application) hashPassword(password string) string {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), 12)
 	if err != nil {
-		log.Println(err)
+		log.Printf("Could not hashPassword")
 	}
 
 	return string(hashedPassword)
