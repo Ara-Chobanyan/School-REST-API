@@ -50,3 +50,4 @@ the routes though.
 
 # Todo 
 - [ ] Dockerize the project.
+- [ ] Make tests for the route handlers.
